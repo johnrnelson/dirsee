@@ -69,22 +69,13 @@ BugLog.Info('Watching folder: ['+Configuration.WatchPath + ']');
 Configuration.RootPath = __dirname;
 
 var HTMLWriter = require("./LIB/HTMLWriter");
-
-
-var dataRec = {
+                            
+HTMLWriter.WriteFile({
+    //Date in a serialize-able format...
     dt:new Date().toLocaleDateString() + ' ' +new Date().toTimeString(),
-    t:'My new test aaa',
     a:'+', // + is add - is delete and * is edit...
-};
-
-// var testDUT = new Date().toUTCString();
-// var testD = new Date().toJSON();
-var testD = new Date().toLocaleDateString() + ' ' +new Date().toTimeString();
-
-var html2WRITE=JSON.stringify(dataRec);
- 
-html2WRITE = '"'+testD+'","action","file statsz","msg"\r\n';
-
-HTMLWriter.WriteFile(html2WRITE);
+    f:'a File Info**',//Action
+    m:'simple msg aaa', // just a simple msg or note...
+});
 
 // process.exit(0);

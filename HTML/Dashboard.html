@@ -8,8 +8,15 @@
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/main.css">
 
+        
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css">
+                
+        <link href='https://fonts.googleapis.com/css?family=Pridi' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=BioRhyme:400,800' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="css/main.css">
+        
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
         
@@ -36,14 +43,9 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><a href="#" onclick="Dashboard.OpenHTMLPanel('./HML/pages/settings.html');">Settings</a></li>
+                        <li><a href="#" onclick="Dashboard.OpenHTMLPanel('./HML/pages/help.html');">Help</a></li>
                     </ul>
-                    <form class="navbar-form navbar-right">
-                        <input type="text" class="form-control" placeholder="Search...">
-                    </form>
                 </div>
             </div>
         </nav>
@@ -52,10 +54,10 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li><a href="#">Add</a></li>
-                        <li><a href="#">Edit</a></li>
-                        <li><a href="#">Delete</a></li>
-                    </ul>
+                        <li><a href="#" onclick="Dashboard.OpenHTMLPanel('');">Add</a></li>
+                        <li><a href="#" onclick="Dashboard.OpenHTMLPanel('');">Edit</a></li>
+                        <li><a href="#" onclick="Dashboard.OpenHTMLPanel('');">Delete</a></li>
+                    </ul> 
                     <ul class="nav nav-sidebar">
                         <li><a href="">Credits</a></li>
                     </ul>
@@ -68,52 +70,14 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Header</th>
-                                    <th>Header</th>
-                                    <th>Header</th>
-                                    <th>Header</th>
+                                    <th>Date Time</th>
+                                    <th>Action</th>
+                                    <th>File Information</th>
+                                    <th>Notes/Messages</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
-
-
-                                <tr>
-                                    <td>1,001</td>
-                                    <td>Lorem</td>
-                                    <td>ipsum</td>
-                                    <td>dolor</td>
-                                    <td>sit</td>
-                                </tr>
-                                <tr>
-                                    <td>1,002</td>
-                                    <td>amet</td>
-                                    <td>consectetur</td>
-                                    <td>adipiscing</td>
-                                    <td>elit</td>
-                                </tr>
-                                <tr>
-                                    <td>1,013</td>
-                                    <td>torquent</td>
-                                    <td>per</td>
-                                    <td>conubia</td>
-                                    <td>nostra</td>
-                                </tr>
-                                <tr>
-                                    <td>1,014</td>
-                                    <td>per</td>
-                                    <td>inceptos</td>
-                                    <td>himenaeos</td>
-                                    <td>Curabitur</td>
-                                </tr>
-                                <tr>
-                                    <td>1,015</td>
-                                    <td>sodales</td>
-                                    <td>ligula</td>
-                                    <td>in</td>
-                                    <td>libero</td>
-                                </tr>
+                            <tbody id="DisplayTableBody">
+ 
                             </tbody>
                         </table>
                     </div>

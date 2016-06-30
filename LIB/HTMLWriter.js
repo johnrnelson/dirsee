@@ -8,12 +8,12 @@ var dataFileName = 'today';
 
 // debugger;
 function WriteFile(Data2Write) {
-
-    fs.appendFile(Configuration.RootPath + '/HISTORY/'+dataFileName+'.json', Data2Write, function(err) {
+    
+    var LINE_OF_DATA = '"'+Data2Write.dt+'","'+Data2Write.a+'","'+Data2Write.f+'","'+Data2Write.m+'"\r\n';
+    fs.appendFile(Configuration.RootPath + '/HISTORY/'+dataFileName+'.json', LINE_OF_DATA, function(err) {
         if (err) {
             return console.log(err);
         }
-
         // console.log("The file was saved!");
         process.exit(0);
     });
