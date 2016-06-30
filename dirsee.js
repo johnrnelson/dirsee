@@ -70,9 +70,21 @@ Configuration.RootPath = __dirname;
 
 var HTMLWriter = require("./LIB/HTMLWriter");
 
-var html2WRITE=`
-<div>grrr</div>
-`;
+
+var dataRec = {
+    dt:new Date().toLocaleDateString() + ' ' +new Date().toTimeString(),
+    t:'My new test aaa',
+    a:'+', // + is add - is delete and * is edit...
+};
+
+// var testDUT = new Date().toUTCString();
+// var testD = new Date().toJSON();
+var testD = new Date().toLocaleDateString() + ' ' +new Date().toTimeString();
+
+var html2WRITE=JSON.stringify(dataRec);
+ 
+html2WRITE = '"'+testD+'","action","file statsz","msg"\r\n';
+
 HTMLWriter.WriteFile(html2WRITE);
 
 // process.exit(0);
