@@ -19,6 +19,11 @@ Good old NPM to the resuce!
 
     Download the zip file for this repo.
  
+Make sure you are using Node 6!
+    nvm install 6
+    nvm use 6
+    nvm alias default 6
+
 
 ## Using
 This is the easy way to test it out once you install it. 
