@@ -17,10 +17,9 @@ Watch a folder or file to see what happens to it.
 ## Installing
 Good old NPM to the resuce! 
 
-    npm install git+https://git@github.com/johnrnelson/dirsee.git --save
+    Download the zip file for this repo.
  
- 
- 
+
 ## Using
 This is the easy way to test it out once you install it. 
  
