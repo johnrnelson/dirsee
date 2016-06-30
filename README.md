@@ -31,4 +31,6 @@ This is the easy way to test it out once you install it.
     npm install
     node dirsee.js
 
+Make sure you change the config.json to reflect your own system.
+
 ## Helpful Links

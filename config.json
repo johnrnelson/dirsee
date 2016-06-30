@@ -1,3 +1,11 @@
 {
-    doh:1
+    "WatchPath":"./TESTING",
+    "HTMLPath":"./HTML",
+    "chokidar":{
+        "persistent": true,
+        "depth": 30,
+        "followSymlinks": false,
+        "useFsEvents": false,
+        "usePolling": false
+    }
 }
