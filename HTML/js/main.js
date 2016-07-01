@@ -6,6 +6,9 @@ var Dashboard = {
             //Added to after we open our local files...
         ],
     },
+    UpdateStatusText:function(StatusText){
+        Dashboard.DSUIHelperEL.innerHTML = StatusText;
+    },
     /*
         A stands for ADD! We keep it simple so the history file 
         can be as small as possible...
@@ -31,6 +34,16 @@ var Dashboard = {
         //If the user clicks on the data row then....
         tr.onclick=function(evt){
             console.info(evt,this.FileInfo);
+        }
+              
+        //If the user clicks on the data row then....
+        tr.onmouseout=function(evt){
+            Dashboard.UpdateStatusText('');
+        }
+        tr.onmouseover=function(evt){
+            // console.info(evt,this.FileInfo);
+            Dashboard.UpdateStatusText(this.FileInfo.f + ' <--FILE');
+            // DSUIHelperEL
         }
         
 
@@ -87,6 +100,7 @@ var Dashboard = {
 };
 
 Dashboard.TableDisplayData = document.getElementById('DisplayTableBody');
+Dashboard.DSUIHelperEL = document.getElementById('DSUIHelperEL');
 Dashboard.TableDisplayData.innerHTML = '';
 
 window.ds = Dashboard;
