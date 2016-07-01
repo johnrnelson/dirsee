@@ -81,3 +81,9 @@ Data Rows are the table items (tr) and (td) tags...
   color: #333333;
   background-color:#ccffcc; 
 }
+.DataRow i{
+  /*color:#000080;*/
+  color:#666666;
+}.DataRow i:hover{
+  color:#000000;
+}
