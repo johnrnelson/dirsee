@@ -100,7 +100,7 @@ var Dashboard = {
             dt: DateTimeOfLogItem,
             a: Action,
             f: FilePath,
-            s: FileStats,
+            // s: FileStats,
             m: MSG
         };
         tr.onclick=function(evt){
@@ -130,11 +130,12 @@ var Dashboard = {
         //If the file has stats...
         if (Object.keys(FileStats).length) {
             console.log(FileStats);
-            var bday = new Date(FileStats.birthtime);
-            // console.info(FileStats.birthtime, bday);
-            // FileStatsHTML = JSON.stringify(FileStats);
-            FileStatsHTML = '' + bday + '';
+            FileStats.birthtime = new Date(FileStats.birthtime);
+            FileStats.ctime = new Date(FileStats.ctime);
+            FileStats.mtime = new Date(FileStats.mtime);
+            FileStatsHTML = '' + FileStats.birthtime + '';
             FileSizeHTML = FileStats.size;
+            tr.FileInfo.s = FileStats;
         }
         else {
 
@@ -159,35 +160,4 @@ window.ds = Dashboard;
 
 
 console.info('The Dashboard JS Ready..');
-
-//Open the local files that the nodes.js process has written out...
-// Dashboard.OpenLocalFiles(function(err) {
-//     if (err) {
-//         debugger;
-//     }
-//     else {
-//         //All files are open and good to go!
-//         // console.clear();
-
-//         console.info('The Dashboard JS Ready..');
-
-//         var tblBOdy = document.getElementById('DisplayTableBody');
-
-//         console.log('DB', tblBOdy);
-
-//         /*
-//             For each row, wrap it in some tasty HTML that looks good, easy to work with,
-//             and has a good beat that you can dance to ... :-)
-//         */
-//         for (var r = Dashboard.DB.Rows.length; r--;) {
-//             var row = Dashboard.DB.Rows[r];
-//             var tr = document.createElement('tr');
-
-//             tr.innerHTML = '<td>' + row.dt + '</td><td>' + row.a + '</td><td>' + row.f + '</td><td>' + row.m + '</td>'
-
-//             tblBOdy.appendChild(tr);
-//         }
-
-
-//     }
-// });
+ 
