@@ -34,17 +34,21 @@ var Dashboard = {
         }
         
 
-        var actionICON = '<i title="Unknown Action" class="fa fa-question-circle animated bounce" aria-hidden="true"></i>';
+        var actionICON = '<i class="fa fa-question-circle animated bounce" aria-hidden="true"></i>';
+        var actionTEXT = 'Unknown Action! ';
 
         if (Action == '*') {
-            actionICON = '<i title="File was edited" class="fa fa-pencil-square animated bounce" aria-hidden="true"></i>';
+            actionICON = '<i class="fa fa-pencil-square animated bounce" aria-hidden="true"></i>';
+            actionTEXT = "Edited ";
         }
         if (Action == '-') {
-            actionICON = '<i title="File was deleted" class="fa fa-minus-circle animated bounce" aria-hidden="true"></i>';
+            actionICON = '<i class="fa fa-minus-circle animated bounce" aria-hidden="true"></i>';
+            actionTEXT = "Deleted ";
         }
 
         if (Action == '+') {
-            actionICON = '<i title="File was added" class="fa fa-plus-circle animated bounce" aria-hidden="true"></i>';
+            actionICON = '<i class="fa fa-plus-circle animated bounce" aria-hidden="true"></i>';
+            actionTEXT = "Added ";
 
         }
 
@@ -69,7 +73,7 @@ var Dashboard = {
         }
 
 
-        tr.title="File:"+FilePath;
+        tr.title= actionTEXT + " file ("+FilePath + ') ';
 
         tr.innerHTML = '<td>' + displayDate + '</td><td>' +
             actionICON + '</td><td>' +
