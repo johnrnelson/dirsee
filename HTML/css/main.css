@@ -1,10 +1,4 @@
-/*
- * Base structure
- */
-
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-
+ 
 body {
   padding-top: 10px;
   cursor: default;
@@ -16,6 +10,15 @@ body {
   text-shadow: 1px 1px 1px #000000;
   font-size: 25px;
   font-variant: small-caps;
+  white-space: nowrap;
+  letter-spacing: .03em;
+}
+.STATUS {
+  font-family: 'Pridi', serif;
+  color: #33ff33;
+  text-shadow: 1px 1px 1px #000000;
+  font-size: 25px;
+  /*font-variant: small-caps;*/
   white-space: nowrap;
   letter-spacing: .03em;
 }
@@ -51,17 +54,7 @@ body {
   padding: 10px;
 }
 
-
-/*
-
-@media (min-width: 468px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-}
-
-*/
+ 
 
 .main .page-header {
   margin-top: 0;
