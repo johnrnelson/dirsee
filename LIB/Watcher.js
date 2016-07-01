@@ -1,4 +1,3 @@
-
 "use strict";
 
 
@@ -8,6 +7,10 @@ var path = require("path");
 var chokidar = require('chokidar');
 
 
+var HTMLWriter = require("./HTMLWriter");
+
+
+
 
 function WatchAFolder(FolderPath2Watch) {
     /*
@@ -15,7 +18,7 @@ function WatchAFolder(FolderPath2Watch) {
     */
 
     var watcher = chokidar.watch(FolderPath2Watch, {
-        
+
         ignored: /node_modules|-min.js|\.git/,
         persistent: true,
         depth: 30,
@@ -25,45 +28,36 @@ function WatchAFolder(FolderPath2Watch) {
     });
     watcher.on('unlink', (event, path) => {
         // BugLog.Warn(event, path);
+            HTMLWriter.WriteFile({
+                a: '-', // + is add - is delete and * is edit...
+                f: path, //Action
+                m: '', // just a simple msg or note...
+            });        
     });
     watcher.on('add', (path) => {
-        var fPath = GetFilePaths(path);
 
 
-        fs.stat(fPath.FullPath, function(err, stats) {
-            fPath.FullPathEditDate = stats.mtime.getTime();
-            fs.stat(fPath.MinFile, function(err, stats) {
 
-                if (err) {
-                    // debugger;;
-                    BugLog.Info('No Min File Found : ' + fPath.MinFile);
-                    ServiceAPI.Compiler(fPath.FullPath, fPath.MinFile);
-                }
-                else {
-                    var MinFileEdit = stats.mtime.getTime();
+        // fs.stat(path, function(err, stats) {
+        //     // fPath.FullPathEditDate = stats.mtime.getTime();
 
-                    var diffTime = MinFileEdit - fPath.FullPathEditDate;
+        //     HTMLWriter.WriteFile({
+        //         a: '+', // + is add - is delete and * is edit...
+        //         f: path, //Action
+        //         m: 'a msg vvv', // just a simple msg or note...
+        //     });
 
-                    if (diffTime < 0) {
 
-                        BugLog.Info('Min File Time Diff : ' + diffTime + ' |  ' + fPath.FullPath);
-                        ServiceAPI.Compiler(fPath.FullPath, fPath.MinFile);
-
-                    }
-                    else {
-                        // BugLog.Info('File is OK-->'+ fPath.FullPath);
-                    }
-                };
-
-            });
-
-        });
+        // });
     });
     watcher.on('change', (path, stats) => {
         if (stats) {
-            var fPath = GetFilePaths(path);
-            BugLog.Info('File changed so compiling ==> ' + fPath.FullPath);
-            ServiceAPI.Compiler(fPath.FullPath, fPath.MinFile);
+            HTMLWriter.WriteFile({
+                a: '*', // + is add - is delete and * is edit...
+                f: path, //Action
+                m: '', // just a simple msg or note...
+            });
+            BugLog.Info('File Change:'+path);
         }
         // console.log(`File ${path} changed size to ${stats.size}`);
     });

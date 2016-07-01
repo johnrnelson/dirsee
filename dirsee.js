@@ -12,7 +12,7 @@ if (parseInt(nodeVer[0]) < 5) {
 
 var fs = require("fs");
 var path = require("path");
-var chokidar = require('chokidar');
+
 
 
 
@@ -68,14 +68,17 @@ BugLog.Info('Watching folder: ['+Configuration.WatchPath + ']');
 
 Configuration.RootPath = __dirname;
 
-var HTMLWriter = require("./LIB/HTMLWriter");
-                            
-HTMLWriter.WriteFile({
-    //Date in a serialize-able format...
-    dt:new Date().toLocaleDateString() + ' ' +new Date().toTimeString(),
-    a:'+', // + is add - is delete and * is edit...
-    f:'a File Info**',//Action
-    m:'simple msg aaa', // just a simple msg or note...
-});
+
+
+  
+
+
+var Watcher = require('./LIB/Watcher');
+
+Watcher.WatchAFolder(Configuration.WatchPath);
+
+
+
 
 // process.exit(0);
+

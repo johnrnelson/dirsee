@@ -6,10 +6,7 @@ var Dashboard = {
             //Added to after we open our local files...
         ],
     },
-    OpenHTMLPanel: function(URL2Show) {
-        console.info('show -->', URL2Show);
-
-    },
+ 
     //Get a file from our host acting as a server... 
     GetFile: function(Request, Response) {
         var xhr = new XMLHttpRequest();
@@ -34,7 +31,7 @@ var Dashboard = {
         // GetFILE();
         var req = {
             m: 'GET',
-            u: '../HISTORY/today.json',
+            u: 'HISTORY/today.json',
         };
 
 
@@ -51,11 +48,34 @@ var Dashboard = {
                     lData = linesOdata[l];
                     if (lData.length > 1) {
                         cData = lData.split(",");
+                        var action = cData[1];
+                        var actionICON = '<i class="fa fa-question-circle" aria-hidden="true"></i>';
+                        // console.info(actionICON)
+
+                        if (action == '"*"') {
+                            actionICON = '<i class="fa fa-pencil-square" aria-hidden="true"></i>';
+                        }
+                        if (action == '"-"') {
+                            actionICON = '<i class="fa fa-minus-circle" aria-hidden="true"></i>';
+                        }
+
+                        if (action == '"+"') {
+                            actionICON = '<i class="fa fa-plus-circle" aria-hidden="true"></i>';
+
+                        }
+                        // debugger;
+
+                        var displayDate = moment(new Date(cData[0])).calendar();
+                        function STRIPQ(String2Strip){
+                            return String2Strip.substr(1,String2Strip.length-2);
+                        }
+
                         Dashboard.DB.Rows.push({
-                            dt: new Date(cData[0]), //date time
-                            a: cData[1], //action
-                            f: cData[2], // file statz
-                            m: cData[3] //message 
+                            dt:displayDate,
+                            // dt: new Date(cData[0]), //date time
+                            a: actionICON, //action
+                            f: STRIPQ(cData[2]), // file statz
+                            m: STRIPQ(cData[3]) //message 
                         });
                     }
                     else {
@@ -80,7 +100,7 @@ Dashboard.OpenLocalFiles(function(err) {
     }
     else {
         //All files are open and good to go!
-        console.clear();
+        // console.clear();
 
         console.info('The Dashboard JS Ready..');
 
@@ -95,12 +115,12 @@ Dashboard.OpenLocalFiles(function(err) {
         for (var r = Dashboard.DB.Rows.length; r--;) {
             var row = Dashboard.DB.Rows[r];
             var tr = document.createElement('tr');
-            
+
             tr.innerHTML = '<td>' + row.dt + '</td><td>' + row.a + '</td><td>' + row.f + '</td><td>' + row.m + '</td>'
-            
+
             tblBOdy.appendChild(tr);
         }
 
 
     }
-})
+});
