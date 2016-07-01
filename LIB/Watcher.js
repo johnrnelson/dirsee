@@ -26,15 +26,30 @@ function WatchAFolder(FolderPath2Watch) {
         // useFsEvents: false,
         // usePolling: false
     });
-    watcher.on('unlink', (event, path) => {
-        // BugLog.Warn(event, path);
-            HTMLWriter.WriteFile({
-                a: '-', // + is add - is delete and * is edit...
-                f: path, //Action
-                m: '', // just a simple msg or note...
-            });        
+    watcher.IsReady = false;
+    watcher.on('unlink', (path) => {
+        BugLog.Info('File delete:' + path);
+        HTMLWriter.WriteFile({
+            a: '-', // + is add - is delete and * is edit...
+            f: path, //Action
+            s: '{}',
+            m: '', // just a simple msg or note...
+        });
     });
+    
     watcher.on('add', (path) => {
+        if (watcher.IsReady) {
+            BugLog.Info('File add:' + path);
+            fs.stat(path, function(err, stats) {
+                //
+                HTMLWriter.WriteFile({
+                    a: '+', // + is add - is delete and * is edit...
+                    f: path, //Action
+                    s: JSON.stringify(stats),
+                    m: '', // just a simple msg or note...
+                });
+            });
+        }
 
     });
     watcher.on('change', (path, stats) => {
@@ -42,15 +57,16 @@ function WatchAFolder(FolderPath2Watch) {
             HTMLWriter.WriteFile({
                 a: '*', // + is add - is delete and * is edit...
                 f: path, //Action
-                s:JSON.stringify(stats),
+                s: JSON.stringify(stats),
                 m: '', // just a simple msg or note...
             });
-            BugLog.Info('File Change:'+path);
+            BugLog.Info('File Change:' + path);
         }
         // console.log(`File ${path} changed size to ${stats.size}`);
     });
     watcher.on('ready', () => {
         BugLog.Info('File Watcher is Ready!');
+        watcher.IsReady = true;
     })
 }
 exports.WatchAFolder = WatchAFolder;

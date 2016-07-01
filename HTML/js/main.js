@@ -88,25 +88,65 @@ var Dashboard = {
             }
         });
     },
-    A: function(dt, a, f, s, m) {
-        console.log(this.arguments);
+    /*
+        A stands for ADD! We keep it simple so the history file 
+        can be as small as possible...
+    */
+    A: function(DateTimeOfLogItem, Action, FilePath, FileStats, MSG) {
+        // console.log(this.arguments);
         var tr = document.createElement('tr');
-        var displayDate = moment(new Date(dt)).calendar();
-        
+        tr.className='DataRow';
+        tr.FileInfo = {
+            dt: DateTimeOfLogItem,
+            a: Action,
+            f: FilePath,
+            s: FileStats,
+            m: MSG
+        };
+        tr.onclick=function(evt){
+            console.info(evt,this.FileInfo);
+        }
+        var displayDate = moment(new Date(DateTimeOfLogItem)).calendar();
+
         var actionICON = '<i class="fa fa-question-circle" aria-hidden="true"></i>';
 
-        if (a== '*') {
+        if (Action == '*') {
             actionICON = '<i class="fa fa-pencil-square" aria-hidden="true"></i>';
         }
-        if (a== '-') {
+        if (Action == '-') {
             actionICON = '<i class="fa fa-minus-circle" aria-hidden="true"></i>';
         }
 
-        if (a== '+') {
+        if (Action == '+') {
             actionICON = '<i class="fa fa-plus-circle" aria-hidden="true"></i>';
 
         }
-        tr.innerHTML = '<td>' + displayDate + '</td><td>' + actionICON + '</td><td>' + f + '</td><td>' + s + '</td><td>' + m + '</td>';
+
+
+        var FileStatsHTML = '';
+        var FileSizeHTML = '';
+ 
+
+        //If the file has stats...
+        if (Object.keys(FileStats).length) {
+            console.log(FileStats);
+            var bday = new Date(FileStats.birthtime);
+            // console.info(FileStats.birthtime, bday);
+            // FileStatsHTML = JSON.stringify(FileStats);
+            FileStatsHTML = '' + bday + '';
+            FileSizeHTML = FileStats.size;
+        }
+        else {
+
+            FileStatsHTML = '';
+        }
+
+        tr.innerHTML = '<td>' + displayDate + '</td><td>' +
+            actionICON + '</td><td>' +
+            FilePath + '</td><td>' +
+            FileSizeHTML + '</td><td>' +
+            FileStatsHTML + '</td><td>' +
+            MSG + '</td>';
 
         Dashboard.TableDisplayData.appendChild(tr);
     }
