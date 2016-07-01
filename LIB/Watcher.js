@@ -36,25 +36,13 @@ function WatchAFolder(FolderPath2Watch) {
     });
     watcher.on('add', (path) => {
 
-
-
-        // fs.stat(path, function(err, stats) {
-        //     // fPath.FullPathEditDate = stats.mtime.getTime();
-
-        //     HTMLWriter.WriteFile({
-        //         a: '+', // + is add - is delete and * is edit...
-        //         f: path, //Action
-        //         m: 'a msg vvv', // just a simple msg or note...
-        //     });
-
-
-        // });
     });
     watcher.on('change', (path, stats) => {
         if (stats) {
             HTMLWriter.WriteFile({
                 a: '*', // + is add - is delete and * is edit...
                 f: path, //Action
+                s:JSON.stringify(stats),
                 m: '', // just a simple msg or note...
             });
             BugLog.Info('File Change:'+path);

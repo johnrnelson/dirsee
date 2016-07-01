@@ -11,14 +11,15 @@ function WriteFile(Data2Write) {
     
     //Date in a serialize-able format...
     var dt = new Date().toLocaleDateString() + ' ' +new Date().toTimeString();
+ 
+    // var LINE_OF_DATA = '"'+dt+'","'+Data2Write.a+'","'+Data2Write.f+'","'+Data2Write.m+'"\r\n';
+    var LINE_OF_DATA = 'ds.A("'+dt+'","'+Data2Write.a+'","'+Data2Write.f+'",'+Data2Write.s+',"'+Data2Write.m+'");\r\n';
+
     
-    var LINE_OF_DATA = '"'+dt+'","'+Data2Write.a+'","'+Data2Write.f+'","'+Data2Write.m+'"\r\n';
-    fs.appendFile(Configuration.RootPath + '/HISTORY/'+dataFileName+'.json', LINE_OF_DATA, function(err) {
+    fs.appendFile(Configuration.RootPath + '/HTML/data/'+dataFileName+'.js', LINE_OF_DATA, function(err) {
         if (err) {
-            return console.log(err);
+            BugLog.Error(err);
         }
-        // console.log("The file was saved!");
-        // process.exit(0);
     });
 }
 
