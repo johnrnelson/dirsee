@@ -4,20 +4,54 @@ body {
   cursor: default;
 }
 
+statusbar {
+    position: fixed;
+    /*padding: 5px;*/
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    white-space: nowrap;
+    background-color: #d9d9d9;
+    /*ss*/
+    border-top: 1px solid #666666;
+    border-right: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    border-left: 1px solid #666666;
+}
+displaytable{
+    display: block;
+    position: fixed;
+    /*padding: 5px;*/
+    margin: 0;
+    top: 50px;
+    bottom: 50px;
+    left: 0;
+    right: 0;    
+    overflow-y: auto;
+    overflow-x:  hidden;
+    
+}
+
 .LOGO {
   font-family: 'Pridi', serif;
   color: #cccccc;
   text-shadow: 1px 1px 1px #000000;
-  font-size: 25px;
+  font-size: 15px;
   font-variant: small-caps;
   white-space: nowrap;
   letter-spacing: .03em;
 }
 .STATUS {
+  display: block;
+  /*position: fixed;*/
+  padding-left: 5px;
+  
   font-family: 'Pridi', serif;
-  color: #33ff33;
-  text-shadow: 1px 1px 1px #000000;
-  font-size: 35px;
+  color: #0000ff;
+  text-shadow: 1px 1px 1px #ffffff;
+  font-size: 20px;
   /*font-variant: small-caps;*/
   white-space: nowrap;
   letter-spacing: .03em;

@@ -6,7 +6,7 @@ var Dashboard = {
             //Added to after we open our local files...
         ],
     },
-    UpdateStatusText:function(StatusText){
+    UpdateStatusText: function(StatusText) {
         Dashboard.DSUIHelperEL.innerHTML = StatusText;
     },
     /*
@@ -15,12 +15,12 @@ var Dashboard = {
     */
     A: function(DateTimeOfLogItem, Action, FilePath, FileStats, MSG) {
         // console.log(this.arguments);
-        
+
         var displayDate = moment(new Date(DateTimeOfLogItem)).calendar();
-        
-        
+
+
         var tr = document.createElement('tr');
-        tr.className='DataRow';
+        tr.className = 'DataRow';
         tr.FileInfo = {
             dt: DateTimeOfLogItem,
             a: Action,
@@ -28,24 +28,24 @@ var Dashboard = {
             // s: FileStats, This gets taken care of kinda special... :-)
             m: MSG
         };
-        
-        
-        
+
+
+
         //If the user clicks on the data row then....
-        tr.onclick=function(evt){
-            console.info(evt,this.FileInfo);
+        tr.onclick = function(evt) {
+            console.info(evt, this.FileInfo);
         }
-              
+
         //If the user clicks on the data row then....
-        tr.onmouseout=function(evt){
+        tr.onmouseout = function(evt) {
             Dashboard.UpdateStatusText('');
         }
-        tr.onmouseover=function(evt){
+        tr.onmouseover = function(evt) {
             // console.info(evt,this.FileInfo);
-            Dashboard.UpdateStatusText(this.FileInfo.f + ' <--FILE');
-            // DSUIHelperEL
+            Dashboard.UpdateStatusText('' + this.FileInfo.f + ' ');
+
         }
-        
+
 
         var actionICON = '<i class="fa fa-question-circle animated bounce" aria-hidden="true"></i>';
         var actionTEXT = 'Unknown Action! ';
@@ -68,15 +68,29 @@ var Dashboard = {
 
         var FileStatsHTML = '';
         var FileSizeHTML = '';
- 
+
 
         //If the file has stats...
         if (Object.keys(FileStats).length) {
+            var displayDate = moment(new Date(DateTimeOfLogItem)).calendar();
+            if (FileStats.birthtime == FileStats.ctime) {
+                FileStatsHTML = '*';
+            }
+            else {
+
+                FileStats.birthtime = moment(new Date(FileStats.birthtime)).calendar();
+                FileStats.ctime = moment(new Date(FileStats.ctime)).calendar();
+                FileStats.mtime = moment(new Date(FileStats.mtime)).calendar();
+                FileStatsHTML = 'BTime:' + FileStats.birthtime + '<br>' +
+                    'CTime:' + FileStats.ctime + '<br>' +
+                    'MTime:' + FileStats.mtime + '<br>' +
+                    '';
+
+            }
             console.log(FileStats);
-            FileStats.birthtime = new Date(FileStats.birthtime);
-            FileStats.ctime = new Date(FileStats.ctime);
-            FileStats.mtime = new Date(FileStats.mtime);
-            FileStatsHTML = '' + FileStats.birthtime + '';
+
+
+
             FileSizeHTML = FileStats.size;
             tr.FileInfo.s = FileStats;
         }
@@ -86,7 +100,7 @@ var Dashboard = {
         }
 
 
-        tr.title= actionTEXT + " file ("+FilePath + ') ';
+        tr.title = actionTEXT + " file (" + FilePath + ') ';
 
         tr.innerHTML = '<td>' + displayDate + '</td><td>' +
             actionICON + '</td><td>' +
@@ -107,4 +121,3 @@ window.ds = Dashboard;
 
 
 console.info('The Dashboard JS Ready..');
- 
