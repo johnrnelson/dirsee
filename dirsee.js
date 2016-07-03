@@ -64,7 +64,6 @@ catch (errorMain) {
 
 
 BugLog.Info('Watching folder: ['+Configuration.WatchPath + ']');
-// console.log(Configuration);
 
 Configuration.RootPath = __dirname;
 
@@ -80,5 +79,4 @@ Watcher.WatchAFolder(Configuration.WatchPath);
 
 
 
-// process.exit(0);
 

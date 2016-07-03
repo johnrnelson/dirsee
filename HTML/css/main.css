@@ -38,10 +38,10 @@ displaytable{
   font-family: 'Pridi', serif;
   color: #cccccc;
   text-shadow: 1px 1px 1px #000000;
-  font-size: 15px;
+  font-size: 25px;
   font-variant: small-caps;
   white-space: nowrap;
-  letter-spacing: .03em;
+  letter-spacing: .08em;
 }
 .STATUS {
   display: block;

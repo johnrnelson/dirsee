@@ -11,8 +11,7 @@ function WriteFile(Data2Write) {
     
     //Date in a serialize-able format...
     var dt = new Date().toLocaleDateString() + ' ' +new Date().toTimeString();
- 
-    // var LINE_OF_DATA = '"'+dt+'","'+Data2Write.a+'","'+Data2Write.f+'","'+Data2Write.m+'"\r\n';
+    
     var LINE_OF_DATA = 'ds.A("'+dt+'","'+Data2Write.a+'","'+Data2Write.f+'",'+Data2Write.s+',"'+Data2Write.m+'");\r\n';
 
     

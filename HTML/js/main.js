@@ -73,7 +73,7 @@ var Dashboard = {
         //If the file has stats...
         if (Object.keys(FileStats).length) {
             var displayDate = moment(new Date(DateTimeOfLogItem)).calendar();
-            if (FileStats.birthtime == FileStats.ctime) {
+            if (FileStats.birthtime == FileStats.mtime) {
                 FileStatsHTML = '*';
             }
             else {
@@ -87,7 +87,7 @@ var Dashboard = {
                     '';
 
             }
-            console.log(FileStats);
+            // console.log(FileStats);
 
 
 
@@ -121,3 +121,4 @@ window.ds = Dashboard;
 
 
 console.info('The Dashboard JS Ready..');
+document.title= 'Dashboard';
