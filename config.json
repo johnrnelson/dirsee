@@ -1,9 +1,10 @@
 {
+    "WatchPathExample":"/home/ubuntu/workspace",
     "WatchPath":"./TESTING",
     "HTMLPath":"./HTML",
     "chokidar":{
         "persistent": true,
-        "depth": 30,
+        "depth": 90,
         "followSymlinks": false,
         "useFsEvents": false,
         "usePolling": false

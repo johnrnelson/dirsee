@@ -6,8 +6,27 @@ var path = require("path");
 
 var chokidar = require('chokidar');
 
+ 
 
-var HTMLWriter = require("./HTMLWriter");
+// var TodaysFile = new Date().toLocaleDateString().replace(/\//g,'-');
+var dataFileName = 'today';
+
+// debugger;
+function WriteFile(Data2Write) {
+    
+    //Date in a serialize-able format...
+    var dt = new Date().toLocaleDateString() + ' ' +new Date().toTimeString();
+    
+    var LINE_OF_DATA = 'ds.A("'+dt+'","'+Data2Write.a+'","'+Data2Write.f+'",'+Data2Write.s+',"'+Data2Write.m+'");\r\n';
+
+    
+    fs.appendFile(Configuration.RootPath + '/HTML/data/'+dataFileName+'.js', LINE_OF_DATA, function(err) {
+        if (err) {
+            BugLog.Error(err);
+        }
+    });
+}
+
 
 
 
@@ -29,7 +48,7 @@ function WatchAFolder(FolderPath2Watch) {
     watcher.IsReady = false;
     watcher.on('unlink', (path) => {
         BugLog.Info('File delete:' + path);
-        HTMLWriter.WriteFile({
+        WriteFile({
             a: '-', // + is add - is delete and * is edit...
             f: path, //Action
             s: '{}',
@@ -42,7 +61,7 @@ function WatchAFolder(FolderPath2Watch) {
             BugLog.Info('File add:' + path);
             fs.stat(path, function(err, stats) {
                 //
-                HTMLWriter.WriteFile({
+                WriteFile({
                     a: '+', // + is add - is delete and * is edit...
                     f: path, //Action
                     s: JSON.stringify(stats),
@@ -54,7 +73,7 @@ function WatchAFolder(FolderPath2Watch) {
     });
     watcher.on('change', (path, stats) => {
         if (stats) {
-            HTMLWriter.WriteFile({
+            WriteFile({
                 a: '*', // + is add - is delete and * is edit...
                 f: path, //Action
                 s: JSON.stringify(stats),
